@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script> -->
+    <script src="../vue.js"></script>
+    <!--安装vscode插件 EaseServer     然后按shift+ctrl+enter键进入 -->
+</head>
+<body>
+    <div id="app">
+        {{message}}
+    </div>
+    <script>
+       var vm = new Vue({
+           el:'#app',//代表我的这个VM是给 #app的div服务的
+           data:{//代表MVVM中的model   控制台访问data 用vm.$data.message
+               message:'Hello Vue!'
+           }
+       })
+    
+    </script>
+</body>
+</html>
