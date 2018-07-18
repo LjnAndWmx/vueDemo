@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <!-- key:确保唯一值 -->
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) in presons" :key="item.id">
+                <input type="text" value="">{{item.id}}===={{item.name}}===={{item.age}}===={{item.address}}
+            </li>
+        </ul>
+        <button @click="add">添加</button>
+    </div>
+    <script>
+      var vm = new Vue({
+          el:'#app',
+          data:{
+              presons:[
+              {id:1001,name:'张三01',age:18,address:'惠州'},
+              {id:1002,name:'张三02',age:18,address:'惠州'},
+              {id:1003,name:'张三03',age:18,address:'惠州'},
+              {id:1004,name:'张三04',age:18,address:'惠州'}
+              ]
+          },
+          methods:{
+            add(){
+                // this.presons.push({
+                //     id:1005+parseInt(Math.random()*100),
+                //     name:'张三'+parseInt(Math.random()*100),
+                //     age:18+parseInt(Math.random()*100),
+                //     address:'广州'
+                // })
+                 this.presons.unshift({
+                    id:1005+parseInt(Math.random()*100),
+                    name:'张三'+parseInt(Math.random()*100),
+                    age:18+parseInt(Math.random()*100),
+                    address:'广州'
+                })
+            }
+          }
+      })
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <!--计算computer 特点：本质是函数,必须要有return值，并且计算属性值，写在computed中，而不是在data中写死。。。与watch的区别 -->
+
+    <div id="app">
+        firstName:
+        <input v-model="firstName" type="text"> lastName:
+        <input v-model="lastName" type="text">
+        <br> fullName:
+        <input type="text" v-model="fullName">
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            firstName: 'san',
+            lastName: 'zhang'
+        },
+        computed: {
+             fullName:function(){
+                 return this.firstName + " " + this.lastName
+             }
+        }
+    })
+</script>
+
+</html>

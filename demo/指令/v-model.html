@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+            <!--简单赋值： 实现双向绑定 -->
+        <!-- <input v-model="message" placeholder="edit me">
+        <p>Message is:{{message}}</p> -->
+
+        <!-- 单选按钮事件绑定 -->
+        <!-- <input type="radio" value="one" v-model="picked" id="one"><label for="">one</label><br>
+        <input type="radio" value="two" v-model="picked" id="two"><label for="">two</label><br>
+        <p>picked：{{picked}}</p> -->
+
+        <!-- 多选题按钮事件绑定 -->
+        <input type="checkbox" id="jack" value="jack" v-model="checkedNames"><label for="jack">jack</label><br>
+        <input type="checkbox" id="join" value="join" v-model="checkedNames"><label for="join">join</label><br>
+        <input type="checkbox" id="mike" value="mike" v-model="checkedNames"><label for="mike">mike</label><br>
+        <span>Checked names:{{checkedNames}}</span>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                // message:''
+                // picked:''
+                checkedNames:[]
+            }
+        })
+    </script>
+</body>
+</html>

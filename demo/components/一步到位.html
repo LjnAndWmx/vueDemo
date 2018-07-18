@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+    <!-- 组件名：必须用驼峰命名法，使用时必须是小写或-的写法 <child-one> -->
+    <!-- 组件作用：复用 封装可重用代码-->
+    <!-- 写法：
+               1.先定义，再注册，最后使用
+               2.定义注册一步到位，最后使用
+               3.对组件定义的优化(扩展)
+
+               4.单文件组件
+    -->
+    <!-- 一个坑：扩展组件时，模板中必须要有根元素 -->
+
+    <div id="app">
+        <!-- 3.使用组件 -->
+        <login></login>
+        <hr>
+        <login></login>
+        <hr>
+        <login></login>
+    </div>
+</body>
+<script>
+    // 1.先定义 //根据自变量定义 
+    // var loginComponent = Vue.extend({
+    //     template:`
+    //     <div>
+    //         用户名: <input type="text"><br>
+    //         密码：<input type="password"><br>
+    //         <button>登入1</button>
+    //     </div>
+    //     `
+        
+       
+    // }) 
+
+    // 2.注册
+    // Vue.component('login',loginComponent)
+    Vue.component('login',{
+        template:`
+        <div>
+            用户名: <input v-model="username" type="text"><br>
+            密码：<input v-model="password" type="password"><br>
+            <button @click="login">登入1</button>
+        </div>
+        `,
+        // 这样写法是错误的，提示组件中的data必须是函数，并且函数必须返回一个自变量的值..。因为组件时重复使用的，所以data必须是一个函数（创建多个对象）
+         // data:{
+        //     username:'张三',
+        //     password:'123'
+        // }
+        // data是函数的作用：当组件重复使用时，可以创建多个实例，各个组件不受影响
+        data(){
+            return {//普通的对象,返回自定义变量
+                username:'战三',
+                password:'123'
+            }
+        },
+        methods:{
+            login(){
+                console.log(this.username+'==='+this.password)
+            }
+        }
+    })
+
+    //根实例：职责与作用：解析id=app中的内容
+    var vm = new Vue({
+        el:'#app',
+        data:{}
+    })
+</script>
+</html>

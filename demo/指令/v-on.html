@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="../vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>  -->
+    <style>
+    img{
+        display: block;
+        width: 300px;
+        height: 300px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <img v-bind:src="src_img" alt=""/> -->
+        <!-- 简写 -->
+        <img :src="src_img" alt=""/>
+
+        <button @click="doThis()">替换图片</button><br><br>
+
+        <!-- 修饰符：once -->
+        <span>{{msg}}</span>
+
+        <button @click.once="changeContent()">改变内容</button><br><br>
+
+        <!-- keyCode  13：enter    27：esc-->
+        <p>keyCode键是enter</p>
+        <input type="text" @keyup.enter = "onEnter">
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                src_img:'http://pic.qiantucdn.com/58pic/17/86/88/55a09df24b97e_1024.jpg',
+                msg:'我是女生',
+                keycode:''
+            },
+            methods: {
+                // doThis:function(){
+                //     this.src_img = 'http://pic25.photophoto.cn/20121216/0010023949794270_b.jpg'
+                // }
+                // 简写
+                doThis(){
+                   this.src_img = 'http://pic25.photophoto.cn/20121216/0010023949794270_b.jpg'
+                },
+                changeContent(){
+                    this.msg="我变成男生"
+                },
+                onEnter(){
+                    console.log('soso')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

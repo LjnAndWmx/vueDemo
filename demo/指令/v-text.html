@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <!-- mvvm中view视图 -->
+    <div id="app">
+        <div v-text="msg"></div>
+        <div v-html="msghtml"></div>
+    </div>
+
+    <script>
+        /**
+             我们把通过new关键字创建出来的vue实例，称为根实例
+             一个项目只需要一个根实例
+         */
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '我是text',
+                msghtml:'<div style="color: red;">我变红了</div>'
+            }
+        })
+    </script>
+</body>
+
+</html>

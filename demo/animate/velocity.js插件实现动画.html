@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter" v-on:before-leave="beforeLeave" v-on:leave="leave" v-on:after-leave="afterLeave">
+            <span v-if="show">隐藏/显示</span>
+        </transition>
+        <br>
+        <button @click="show = !show">toggle</button>
+    </div>
+    <script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            show:false
+        },
+        methods:{
+
+            beforeEnter(el){
+                // 不能使用双引号
+               el.style.paddingLeft="200px"
+               el.style.opacity = 0
+            },
+            enter(el,done){
+                //    被动画元素       被动画样式                      动画过渡时间
+                Velocity(el,{opacity:1,paddingLeft:'0px'},{duration:2000,complete:done})
+            },
+            // 动画结束之后，清理一下
+            afterEnter(el){
+                console.log('after enter')
+                alert('动画结束了')
+            },
+            beforeLeave(el){
+                el.style.paddingLeft="0px"
+                el.style.opacity = 1
+            },
+            leave(el,done){
+                Velocity(el,{opacity:0,paddingLeft:'200px'},{duration:2000,complete:done})
+            },
+            afterLeave(el){
+                alert('我离开了')
+            }
+        }
+
+    })
+    </script>
+</body>
+</html>

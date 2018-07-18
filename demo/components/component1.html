@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+    <!-- 组件作用：复用 封装可重用代码-->
+    <!-- 写法：
+               1.先定义，再注册，最后使用
+               2.定义注册一步到位，最后使用
+               3.对组件定义的优化(扩展)
+
+               4.单文件组件
+    -->
+    <!-- 一个坑：扩展组件时，模板中必须要有根元素 -->
+
+    <div id="app">
+        <!-- 3.使用组件 -->
+        <login></login>
+    </div>
+</body>
+<script>
+    // 1.先定义 //根据自变量定义 
+    var loginComponent = Vue.extend({
+        template:`
+        <div>
+            用户名: <input type="text"><br>
+            密码：<input type="password"><br>
+            <button>登入1</button>
+        </div>
+        `
+    }) 
+
+    // 2.注册
+    Vue.component('login',loginComponent)
+
+    //根实例：职责与作用：解析id=app中的内容
+    var vm = new Vue({
+        el:'#app',
+        data:{}
+    })
+</script>
+</html>

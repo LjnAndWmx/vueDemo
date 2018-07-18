@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 网络差的时候,显示-->
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <span id="app">
+        <span v-pre>{{this will not be compiled }}</span><br><br>
+        <!-- v-cloak：遮盖   v-once:只显示一次-->
+        <div v-cloak>{{message}}</div><br><br>
+        <div v-once>{{message}}</div><br><br>
+       <button @click="message = '我改变了哈！'">点击我改变值</button>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: '显示或隐藏'
+            }
+        })
+    </script>
+</body>
+
+</html>

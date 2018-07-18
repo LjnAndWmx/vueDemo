@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <!-- 钩子函数：可以在属性中声明JavaScript钩子 以v-on开头-->
+    <div id="app">
+        <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter" @before-leave="beforeLeave" @leave="leave" @after-leave="afterLeave">
+            <span v-if="isShow">hello world</span>
+        </transition>
+        <br>
+        <button @click="isShow = !isShow">toggle</button>
+    </div>
+</body>
+<script>
+    // 根实例
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            isShow: false
+        },
+        methods: {
+            beforeEnter(el) {
+                el.style.paddingLeft = '200px'
+                el.style.opacity = 0
+            },
+            // 动画的过程写在enter或leave钩子函数中
+            enter(el, done) {
+
+                el.style.transition = "all 2s"
+                // 设置动画帧
+                el.offsetWidth
+
+                el.style.paddingLeft = '0px'
+                el.style.opacity = 1
+                done()
+            },
+            afterEnter(el) {
+                console.log('after enter')
+            },
+            beforeLeave(el) {
+                // el.style.paddingLeft = '0'
+                // el.style.opacity = 1
+            },
+            // 动画的过程写在enter或leave钩子函数中
+            leave(el, done) {
+
+                el.style.transition = "all 2s"
+                // 设置动画帧
+                el.offsetWidth
+
+                el.style.paddingLeft = '200px'
+                el.style.opacity = 0
+                done()
+            },
+            afterLeave(el) {
+                console.log('after leave')
+            }
+        }
+    })
+</script>
+
+</html>
