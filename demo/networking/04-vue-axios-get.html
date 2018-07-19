@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 导入文件vue  vue-resourcs(必须先引入vue，服务于vue) -->
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="getLogin">Get登录</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            methods: {
+                getLogin() {
+                    const url = "http://127.0.0.1:6688/api/login?username=zhangsan&password=123"
+                    // GET /someUrl
+                    axios.get(url).then(res => {
+                        // success callback
+                        console.log(res.data)
+                    }, err => {
+                        // error callback
+                        console.log(err)
+                    });
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

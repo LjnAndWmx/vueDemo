@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/velocity/2.0.4/velocity.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+    <style>
+        .confirm {
+            margin: 100px auto;
+            width: 500px;
+            height: 300px;
+        }
+        .panel{
+            width: 100%;
+            height: 100%;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button>点击弹出模态框</button>
+        <transition v-on:before-enter="beforeEnter"
+        v-on:enter="enter"
+        v-on:after-enter="afterEnter"
+        v-on:before-leave="beforeLeave"
+        v-on:leave="leave"
+        v-on:after-leave="afterLeave">
+            <div class="confirm">
+                <div class="panel panel-success">
+                    <div class="panel-heading">是否确定删除</div>
+                    <div class="panel-body">
+                        <button class="btn btn-success">确定</button>
+                        <button class="btn btn-danger">取消</button>
+                    </div>
+                </div>
+            </div>
+        </transition>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app'
+    })
+</script>
+
+</html>

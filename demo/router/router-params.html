@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/googsList">商品类别</router-link>
+        <router-link to="/newsList">新闻列表</router-link>
+
+        <router-view></router-view>
+    </div>
+    <script>
+        // 定义路由(组件)
+        const googsList = Vue.extend({
+            template: `<div>我是商品列表</div>`
+        })
+        const newsList = { // 注意要有根路径
+            template: `
+            <div>
+                <router-link to="/newsDetailList/1001">新闻列表1</router-link>
+                <router-link to="/newsDetailList/1002">新闻列表2</router-link>
+                <router-link to="/newsDetailList/1003">新闻列表3</router-link>
+                <router-link to="/newsDetailList/1004">新闻列表4</router-link>
+            </div>
+            `
+        }
+        const newsDetailList = { // 注意要有根路径
+            template: `
+            <div>
+                我是新闻详情列表{{ $route.params.id }}
+            </div>
+            `
+        }
+
+
+        //创建路由规则
+        const router = new VueRouter({
+            routes: [
+            {
+                    path:'/',
+                    component:googsList
+                },
+                {
+                    path:'/googsList',
+                    component:googsList
+                },
+                {
+                    path:'/newsList',
+                    component:newsList
+                },
+                // 动态路径参数 以冒号开头
+                {
+                    path: '/newsDetailList/:id',
+                    component: newsDetailList
+                }
+            ]
+        })
+
+
+        //创建根实例
+        var vm = new Vue({
+            el: '#app',
+            router
+        })
+    </script>
+</body>
+
+</html>

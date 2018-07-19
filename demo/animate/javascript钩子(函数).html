@@ -46,11 +46,13 @@
                 console.log('after enter')
             },
             beforeLeave(el) {
-                // el.style.paddingLeft = '0'
-                // el.style.opacity = 1
+                console.log('1111111111111')
+                el.style.paddingLeft = '0'
+                el.style.opacity = 1
             },
             // 动画的过程写在enter或leave钩子函数中
             leave(el, done) {
+                console.log('2222222222222')
 
                 el.style.transition = "all 2s"
                 // 设置动画帧
@@ -58,7 +60,11 @@
 
                 el.style.paddingLeft = '200px'
                 el.style.opacity = 0
-                done()
+                // 使用延迟
+                setTimeout(()=>{
+                    done()
+                },3000)
+                // done()
             },
             afterLeave(el) {
                 console.log('after leave')

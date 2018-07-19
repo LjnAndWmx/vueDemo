@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>品牌管理</title>
+    <script src="https://cdn.bootcss.com/velocity/2.0.4/velocity.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+    <style>
+        #app {
+            width: 600px;
+            margin: 10px auto;
+        }
+
+        .tb {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .tb th {
+            background-color: #0094ff;
+            color: white;
+        }
+
+        .tb td,
+        .tb th {
+            padding: 5px;
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .add {
+            padding: 5px;
+            border: 1px solid black;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<script type="text/html" id="templateId">
+    <div>
+        <div class="add">
+            编号:
+            <input type="text" v-model="id"> 品牌名称:
+            <input type="text" v-model="name">
+            <input type="button" @click="add" value="添加">
+        </div>
+
+        <div class="add">
+            品牌名称:
+            <!-- 如果我们调用的函数，没有参数，我们可以加()，也可以不加 -->
+            <input type="text" v-model="keyword" placeholder="请输入搜索条件">
+        </div>
+        <table class="tb">
+            <tr>
+                <th>编号</th>
+                <th>品牌名称</th>
+                <th>创立时间</th>
+                <th>操作</th>
+            </tr>
+            <tr v-if="this.products.length==0">
+                <td colspan="4">没有数据啦</td>
+                <!-- rowspan="4" -->
+            </tr>
+            <!-- 动态生成内容tr -->
+            <tr v-for="item in newBrandList" :key="item.id">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.ctime}}</td>
+                <td>
+                    <a href="" @click="deleteById(item.id)">删除</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</script>
+
+<body>
+    <div id="app">
+        <brand-manager></brand-manager>
+    </div>
+</body>
+<script>
+    //定义和注册一步到位
+    Vue.component('brand-manager', {
+        template: `#templateId`,
+        data() {
+            return {
+                products: [
+                       
+                ],
+                id: '',
+                name: '',
+                keyword:''
+            }
+        },
+        // 生命周期钩子
+        created(){
+            this.getBrandListData()
+        },
+        methods: {
+           //获取服务器上面所有的品牌数据
+           getBrandListData() {
+                //1.准备url
+                const url = "http://127.0.0.1:6688/api/getbrandlist"
+
+                axios.get(url).then(res => {
+                    this.products = res.data
+                    console.log(res.data)
+                }, err => {
+                    console.log(err)
+                })
+            },
+            add() {
+                const url = "127.0.0.1:6688/api/addproduct"
+                // if (this.id.trim() == '' || this.name.trim() == '') {
+                //     alert('请先输入数据')
+                //     return
+                // }
+                // this.products.push({
+                //     id: this.id,
+                //     name: this.name,
+                //     ctime: new Date()
+                // })
+                // this.id = ''
+                // this.name = ''
+                // console.log(this)//代表vue这个对象
+            },
+            deleteById(id) {
+                // 先获取对应的id,根据id去寻找索引值，对应索引值进行删除对象
+
+                const index = this.products.findIndex(item => {
+                    return item.id === id //判断id值是否相同，true 返回索引  fasle 返回-1
+                })
+                //   console.log(index)
+                this.products.splice(index, 1)
+            }
+        },
+        computed:{
+            newBrandList(){
+               return this.products.filter(item=>{
+                   this.name.includes(this.keyword)
+               })
+            }
+        }
+    })
+
+    var vm = new Vue({
+        el: "#app"
+    })
+</script>
+
+</html>
